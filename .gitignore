@@ -1,3 +1,7 @@
 !.gitignore
 *.pyc
 *.pth
+/checkpoints
+/img
+/vid
+/df
