@@ -53,7 +53,7 @@ def run_cam(model, device):
             box = b['box']
             face = frame[ max(0, box[1]) : min(w-1, box[1]+box[3]), max(0, box[0]) : min(h-1, box[0]+box[2]) ]
             input_face = preprocess_frame(face).to(device)
-            if cv2.waitKey(2) & 0xFF == ord('1'):
+            if cv2.waitKey(1) & 0xFF == ord('1'):
                 print('Taken picture')
                 cv2.imwrite('img/capture.jpg', face)
                 img_embeddings = model(input_face).detach()
@@ -65,11 +65,11 @@ def run_cam(model, device):
                 else : color = (0,0,255)
             cv2.rectangle(frame, (box[0], box[1]), (box[0]+box[2], box[1]+box[3]), color, 4)
             cv2.putText(frame, str(sim), (20, 100), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 0), 1, cv2.LINE_AA)
-        if cv2.waitKey(2) & 0xFF == ord('2'):
+        if cv2.waitKey(1) & 0xFF == ord('2'):
             print('Release picture')
             img_taken = False
         cv2.putText(frame, 'img taken' if img_taken else '' , (20, 50), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 255, 0), 1, cv2.LINE_AA)
-        if cv2.waitKey(2) & 0xFF == 27:  # esc key
+        if cv2.waitKey(1) & 0xFF == 27:  # esc key
             break
         cv2.imshow('image', frame)
     cap.release()
